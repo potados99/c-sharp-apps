@@ -38,7 +38,10 @@ namespace Fraction
         }
 
         #region Operator
-
+        public static Fraction operator +(Fraction left, Fraction right)
+        {
+            return Add(left, right);
+        }
         public static Fraction operator +(Fraction left, Object right)
         {
             return Add(left, right);
@@ -48,6 +51,10 @@ namespace Fraction
             return Add(left, right);
         }
 
+        public static Fraction operator -(Fraction left, Fraction right)
+        {
+            return Subtract(left, right);
+        }
         public static Fraction operator-(Fraction left, Object right)
         {
             return Subtract(left, right);
@@ -57,7 +64,11 @@ namespace Fraction
             return Subtract(left, right);
         }
 
-        public static Fraction operator*(Fraction left, Object right)
+        public static Fraction operator *(Fraction left, Object right)
+        {
+            return Multiply(left, right);
+        }
+        public static Fraction operator*(Fraction left, Fraction right)
         {
             return Multiply(left, right);
         }
@@ -66,6 +77,10 @@ namespace Fraction
             return Multiply(left, right);
         }
 
+        public static Fraction operator /(Fraction left, Fraction right)
+        {
+            return Divide(left, right);
+        }
         public static Fraction operator/(Fraction left, Object right)
         {
             return Divide(left, right);
@@ -106,7 +121,7 @@ namespace Fraction
                 rightNumerator = (right as Fraction).Numerator;
                 rightDenominator = (right as Fraction).Denominator;
             }
-            else if (left.GetType() == typeof(int))
+            else if (right.GetType() == typeof(int))
             {
                 rightNumerator = (int)right;
                 rightDenominator = 1;

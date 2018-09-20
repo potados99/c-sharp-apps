@@ -13,8 +13,12 @@ namespace Fraction
             var a = new Fraction(1,2);
             var b = new Fraction(2,3);
 
-            //var c = Add(a, b);
             var c = a + b;
+            var d = a + 2;
+
+            Console.WriteLine(c.ToString() + " " + d.ToString());
+
+            Console.Read();
         }
     }
 }
