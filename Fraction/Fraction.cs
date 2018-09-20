@@ -38,6 +38,7 @@ namespace Fraction
         }
 
         #region Operator
+
         public static Fraction operator +(Fraction left, Fraction right)
         {
             return Add(left, right);
