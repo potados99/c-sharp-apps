@@ -83,6 +83,8 @@ namespace Fraction {
 
         #region Private Methods
 
+        #region Operations
+
         private static Fraction Add(long leftNumerator, long leftDenominator, long rightNumerator, long rightDenominator) {
             var lcm = GetLCM(leftDenominator, rightDenominator);
 
@@ -92,9 +94,7 @@ namespace Fraction {
             var leftNumResult = leftNumerator * leftMultiplied;
             var rightNumResult = rightNumerator * rightMultiplied;
 
-            Fraction Added = new Fraction(leftNumResult + rightNumResult, lcm);
-
-            return Added;
+            return new Fraction(leftNumResult + rightNumResult, lcm);
         }
         private static Fraction Add(Object left, Object right) {
             long leftNumerator, leftDenominator = 1, rightNumerator, rightDenominator = 1;
@@ -131,6 +131,8 @@ namespace Fraction {
 
             return Multiply(leftNumerator, leftDenominator, rightDenominator, rightNumerator);
         }
+
+        #endregion
 
         private static void Extract(Object left, Object right, out long leftNumerator, out long leftDenominator, out long rightNumerator, out long rightDenominator) {
             if (left is Fraction) {

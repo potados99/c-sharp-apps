@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Complex
 {
@@ -38,13 +34,53 @@ namespace Complex
         #region Public Methods
 
         public override string ToString() {
-            return base.ToString();
+            return String.Format("({0:G3} + {1:G3}i)", this.Real, this.Image);
+        }
+
+        public string PreciseString() {
+            return String.Format("({0:G17} + {1:G17}i)", this.Real, this.Image);
         }
 
         #region Operator
 
-        public static Complex operator +(Complex left, Complex right) {
-            return new Complex();
+        public static Complex operator+(Complex left, Complex right) {
+            return Add(left, right);
+        }
+        public static Complex operator+(Complex left, Object right) {
+            return Add(left, right);
+        }
+        public static Complex operator+(Object left, Complex right) {
+            return Add(left, right);
+        }
+
+        public static Complex operator-(Complex left, Complex right) {
+            return Subtract(left, right);
+        }
+        public static Complex operator-(Complex left, Object right) {
+            return Subtract(left, right);
+        }
+        public static Complex operator-(Object left, Complex right) {
+            return Subtract(left, right);
+        }
+
+        public static Complex operator*(Complex left, Complex right) {
+            return Multiply(left, right);
+        }
+        public static Complex operator*(Complex left, Object right) {
+            return Multiply(left, right);
+        }
+        public static Complex operator*(Object left, Complex right) {
+            return Multiply(left, right);
+        }
+
+        public static Complex operator/(Complex left, Complex right) {
+            return Divide(left, right);
+        }
+        public static Complex operator/(Complex left, Object right) {
+            return Divide(left, right);
+        }
+        public static Complex operator/(Object left, Complex right) {
+            return Divide(left, right);
         }
 
         #endregion
@@ -54,7 +90,9 @@ namespace Complex
 
         #region Private Methods
 
-        private Complex Add(Object left, Object right) {
+        #region Operations
+
+        private static Complex Add(Object left, Object right) {
             double leftReal, leftImage, rightReal, rightImage;
 
             Extract(left, right, out leftReal, out leftImage, out rightReal, out rightImage);
@@ -62,32 +100,33 @@ namespace Complex
             return new Complex(leftReal + rightReal, leftImage + rightImage);
         }
 
-        private Complex Subtract(Object left, Object right) {
+        private static Complex Subtract(Object left, Object right) {
             double leftReal, leftImage, rightReal, rightImage;
 
             Extract(left, right, out leftReal, out leftImage, out rightReal, out rightImage);
 
-            return new Complex();
+            return new Complex(leftReal - rightReal, leftImage - rightImage);
         }
 
-        private Complex Multiply(Object left, Object right) {
+        private static Complex Multiply(Object left, Object right) {
             double leftReal, leftImage, rightReal, rightImage;
 
             Extract(left, right, out leftReal, out leftImage, out rightReal, out rightImage);
 
-
-            return new Complex();
+            return new Complex(leftReal * rightReal, leftImage * rightImage);
         }
 
-        private Complex Divide(Object left, Object right) {
+        private static Complex Divide(Object left, Object right) {
             double leftReal, leftImage, rightReal, rightImage;
 
             Extract(left, right, out leftReal, out leftImage, out rightReal, out rightImage);
 
-            return new Complex();
+            return new Complex(leftReal / rightReal, leftImage / rightImage);
         }
 
-        private void Extract(Object left, Object right, out double leftReal, out double leftImage, out double rightReal, out double rightImage) {
+        #endregion
+
+        private static void Extract(Object left, Object right, out double leftReal, out double leftImage, out double rightReal, out double rightImage) {
             if (left is Complex) {
                 leftReal = (left as Complex).Real;
                 leftImage = (left as Complex).Image;
@@ -113,7 +152,7 @@ namespace Complex
             }
         }
 
-        private bool IsAvailableType(Object boxed) {
+        private static bool IsAvailableType(Object boxed) {
             return (boxed is short || boxed is int || boxed is float || boxed is double);
         }
 
@@ -122,17 +161,21 @@ namespace Complex
 
         #region Requirements
 
-        private Complex AddComplex(Complex left, Complex right) {
+        public static Complex AddComplex(Complex left, Complex right) {
             return Add(left, right);
         }
-        private Complex SubComplex(Complex left, Complex right) {
+        public static Complex SubComplex(Complex left, Complex right) {
             return Subtract(left, right);
         }
-        private Complex MulComplex(Complex left, Complex right) {
+        public static Complex MulComplex(Complex left, Complex right) {
             return Multiply(left, right);
         }
-        private Complex DivComplex(Complex left, Complex right) {
+        public static Complex DivComplex(Complex left, Complex right) {
             return Divide(left, right);
+        }
+
+        public void PrintComplex() {
+            Console.Write(this);
         }
 
         #endregion
