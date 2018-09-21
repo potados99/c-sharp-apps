@@ -113,7 +113,12 @@ namespace Complex
 
             Extract(left, right, out leftReal, out leftImage, out rightReal, out rightImage);
 
-            return new Complex(leftReal * rightReal, leftImage * rightImage);
+            return Multiply(leftReal, leftImage, rightReal, rightImage);
+        }
+        private static Complex Multiply(double leftReal, double leftImage, double rightReal, double rightImage) {
+            var realTotal = (leftReal * rightReal) + (leftImage * rightImage * -1);
+            var imageTotal = (leftImage * rightReal) + (leftReal * rightImage);
+            return new Complex(realTotal, imageTotal);
         }
 
         private static Complex Divide(Object left, Object right) {
@@ -121,7 +126,15 @@ namespace Complex
 
             Extract(left, right, out leftReal, out leftImage, out rightReal, out rightImage);
 
-            return new Complex(leftReal / rightReal, leftImage / rightImage);
+            return Divide(leftReal, leftImage, rightReal, rightImage);
+        }
+        private static Complex Divide(double leftReal, double leftImage, double rightReal, double rightImage) {
+            var denominator = (rightReal * rightReal) + (rightImage * rightImage);
+
+            var realTotal = (leftReal * rightReal) + (leftImage * rightImage);
+            var imageTotal = (leftImage * rightReal) + (leftReal * -rightImage);
+
+            return new Complex(realTotal / denominator, imageTotal / denominator);
         }
 
         #endregion

@@ -85,6 +85,13 @@ namespace Fraction {
 
         #region Operations
 
+        private static Fraction Add(Object left, Object right) {
+            long leftNumerator, leftDenominator = 1, rightNumerator, rightDenominator = 1;
+
+            Extract(left, right, out leftNumerator, out leftDenominator, out rightNumerator, out rightDenominator);
+
+            return Add(leftNumerator, leftDenominator, rightNumerator, rightDenominator);
+        }
         private static Fraction Add(long leftNumerator, long leftDenominator, long rightNumerator, long rightDenominator) {
             var lcm = GetLCM(leftDenominator, rightDenominator);
 
@@ -96,13 +103,6 @@ namespace Fraction {
 
             return new Fraction(leftNumResult + rightNumResult, lcm);
         }
-        private static Fraction Add(Object left, Object right) {
-            long leftNumerator, leftDenominator = 1, rightNumerator, rightDenominator = 1;
-
-            Extract(left, right, out leftNumerator, out leftDenominator, out rightNumerator, out rightDenominator);
-
-            return Add(leftNumerator, leftDenominator, rightNumerator, rightDenominator);
-        }
 
         private static Fraction Subtract(Object left, Object right) {
             long leftNumerator, leftDenominator = 1, rightNumerator, rightDenominator = 1;
@@ -112,16 +112,16 @@ namespace Fraction {
             return Add(leftNumerator, leftDenominator, -rightNumerator, rightDenominator);
         }
 
-        private static Fraction Multiply(long leftNumerator, long leftDenominator, long rightNumerator, long rightDenominator) {
-            return new Fraction(leftNumerator * rightNumerator, leftDenominator * rightDenominator);
-
-        }
         private static Fraction Multiply(Object left, Object right) {
             long leftNumerator, leftDenominator = 1, rightNumerator, rightDenominator = 1;
 
             Extract(left, right, out leftNumerator, out leftDenominator, out rightNumerator, out rightDenominator);
 
             return new Fraction(leftNumerator * rightNumerator, leftDenominator * rightDenominator);
+        }
+        private static Fraction Multiply(long leftNumerator, long leftDenominator, long rightNumerator, long rightDenominator) {
+            return new Fraction(leftNumerator * rightNumerator, leftDenominator * rightDenominator);
+
         }
 
         private static Fraction Divide(Object left, Object right) {
