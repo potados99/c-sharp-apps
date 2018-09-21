@@ -118,6 +118,7 @@ namespace Complex
         private static Complex Multiply(double leftReal, double leftImage, double rightReal, double rightImage) {
             var realTotal = (leftReal * rightReal) + (leftImage * rightImage * -1);
             var imageTotal = (leftImage * rightReal) + (leftReal * rightImage);
+
             return new Complex(realTotal, imageTotal);
         }
 

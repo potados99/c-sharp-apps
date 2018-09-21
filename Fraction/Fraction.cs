@@ -121,7 +121,6 @@ namespace Fraction {
         }
         private static Fraction Multiply(long leftNumerator, long leftDenominator, long rightNumerator, long rightDenominator) {
             return new Fraction(leftNumerator * rightNumerator, leftDenominator * rightDenominator);
-
         }
 
         private static Fraction Divide(Object left, Object right) {
