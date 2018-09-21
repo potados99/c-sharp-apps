@@ -57,31 +57,64 @@ namespace Complex
         private Complex Add(Object left, Object right) {
             double leftReal, leftImage, rightReal, rightImage;
 
-            if (left is Complex) {
-                leftReal = (left as Complex).Real;
-                leftImage = (left as Complex).Image;
-            }
-            else if (left is int || left is double) {
-                leftReal = (int)left;
-                leftImage = 0;
-            }
-            else {
-                throw new TypeAccessException("Cannot apply + operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
-            }
+            Extract(left, right, out leftReal, out leftImage, out rightReal, out rightImage);
 
-            return new Complex();
+            return new Complex(leftReal + rightReal, leftImage + rightImage);
         }
 
         private Complex Subtract(Object left, Object right) {
+            double leftReal, leftImage, rightReal, rightImage;
+
+            Extract(left, right, out leftReal, out leftImage, out rightReal, out rightImage);
+
             return new Complex();
         }
 
         private Complex Multiply(Object left, Object right) {
+            double leftReal, leftImage, rightReal, rightImage;
+
+            Extract(left, right, out leftReal, out leftImage, out rightReal, out rightImage);
+
+
             return new Complex();
         }
 
         private Complex Divide(Object left, Object right) {
+            double leftReal, leftImage, rightReal, rightImage;
+
+            Extract(left, right, out leftReal, out leftImage, out rightReal, out rightImage);
+
             return new Complex();
+        }
+
+        private void Extract(Object left, Object right, out double leftReal, out double leftImage, out double rightReal, out double rightImage) {
+            if (left is Complex) {
+                leftReal = (left as Complex).Real;
+                leftImage = (left as Complex).Image;
+            }
+            else if (IsAvailableType(left)) {
+                leftReal = Convert.ToDouble(left);
+                leftImage = 0;
+            }
+            else {
+                throw new TypeAccessException("Cannot apply operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
+            }
+
+            if (right is Complex) {
+                rightReal = (right as Complex).Real;
+                rightImage = (right as Complex).Image;
+            }
+            else if (IsAvailableType(right)) {
+                rightReal = Convert.ToDouble(right);
+                rightImage = 0;
+            }
+            else {
+                throw new TypeAccessException("Cannot apply operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
+            }
+        }
+
+        private bool IsAvailableType(Object boxed) {
+            return (boxed is short || boxed is int || boxed is float || boxed is double);
         }
 
         #endregion

@@ -83,33 +83,7 @@ namespace Fraction {
 
         #region Private Methods
 
-        private static Fraction Add(Object left, Object right) {
-            long leftNumerator, leftDenominator = 1, rightNumerator, rightDenominator = 1;
-
-            if (left is Fraction) {
-                leftNumerator = (left as Fraction).Numerator;
-                leftDenominator = (left as Fraction).Denominator;
-            }
-            else if (left is int || left is long) {
-                leftNumerator = Convert.ToInt64(left);
-                leftDenominator = 1;
-            }
-            else {
-                throw new TypeAccessException("Cannot apply + operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
-            }
-
-            if (right is Fraction) {
-                rightNumerator = (right as Fraction).Numerator;
-                rightDenominator = (right as Fraction).Denominator;
-            }
-            else if (right is int || right is long) {
-                rightNumerator = Convert.ToInt64(right);
-                rightDenominator = 1;
-            }
-            else {
-                throw new TypeAccessException("Cannot apply + operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
-            }
-
+        private static Fraction Add(long leftNumerator, long leftDenominator, long rightNumerator, long rightDenominator) {
             var lcm = GetLCM(leftDenominator, rightDenominator);
 
             var leftMultiplied = lcm / leftDenominator;
@@ -122,67 +96,70 @@ namespace Fraction {
 
             return Added;
         }
+        private static Fraction Add(Object left, Object right) {
+            long leftNumerator, leftDenominator = 1, rightNumerator, rightDenominator = 1;
 
-        private static Fraction Subtract(Object left, Object right) {
-            Fraction Suctracted;
+            Extract(left, right, out leftNumerator, out leftDenominator, out rightNumerator, out rightDenominator);
 
-            if (right is Fraction) {
-                Suctracted = Add(left, (right as Fraction) * -1);
-            }
-            else if (right is int || right is long) {
-                Suctracted = Add(left, Convert.ToInt64(right) * -1);
-            }
-            else {
-                throw new TypeAccessException("Cannot apply - operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
-            }
-
-            return Suctracted;
+            return Add(leftNumerator, leftDenominator, rightNumerator, rightDenominator);
         }
 
-        private static Fraction Multiply(Object left, Object right) {
-            long leftNumerator, leftDenominator, rightNumerator, rightDenominator;
+        private static Fraction Subtract(Object left, Object right) {
+            long leftNumerator, leftDenominator = 1, rightNumerator, rightDenominator = 1;
 
+            Extract(left, right, out leftNumerator, out leftDenominator, out rightNumerator, out rightDenominator);
+
+            return Add(leftNumerator, leftDenominator, -rightNumerator, rightDenominator);
+        }
+
+        private static Fraction Multiply(long leftNumerator, long leftDenominator, long rightNumerator, long rightDenominator) {
+            return new Fraction(leftNumerator * rightNumerator, leftDenominator * rightDenominator);
+
+        }
+        private static Fraction Multiply(Object left, Object right) {
+            long leftNumerator, leftDenominator = 1, rightNumerator, rightDenominator = 1;
+
+            Extract(left, right, out leftNumerator, out leftDenominator, out rightNumerator, out rightDenominator);
+
+            return new Fraction(leftNumerator * rightNumerator, leftDenominator * rightDenominator);
+        }
+
+        private static Fraction Divide(Object left, Object right) {
+            long leftNumerator, leftDenominator = 1, rightNumerator, rightDenominator = 1;
+
+            Extract(left, right, out leftNumerator, out leftDenominator, out rightNumerator, out rightDenominator);
+
+            return Multiply(leftNumerator, leftDenominator, rightDenominator, rightNumerator);
+        }
+
+        private static void Extract(Object left, Object right, out long leftNumerator, out long leftDenominator, out long rightNumerator, out long rightDenominator) {
             if (left is Fraction) {
                 leftNumerator = (left as Fraction).Numerator;
                 leftDenominator = (left as Fraction).Denominator;
             }
-            else if (left is int || left is long) {
+            else if (IsAvailableType(left)) {
                 leftNumerator = Convert.ToInt64(left);
                 leftDenominator = 1;
             }
             else {
-                throw new TypeAccessException("Cannot apply * operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
+                throw new TypeAccessException("Cannot apply operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
             }
 
             if (right is Fraction) {
                 rightNumerator = (right as Fraction).Numerator;
                 rightDenominator = (right as Fraction).Denominator;
             }
-            else if (right is int || right is long) {
+            else if (IsAvailableType(right)) {
                 rightNumerator = Convert.ToInt64(right);
                 rightDenominator = 1;
             }
             else {
-                throw new TypeAccessException("Cannot apply * operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
+                throw new TypeAccessException("Cannot apply operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
             }
-
-            return new Fraction(leftNumerator * rightNumerator, leftDenominator * rightDenominator);
         }
 
-        private static Fraction Divide(Object left, Object right) {
-            Fraction Divided;
-
-            if (right is Fraction) {
-                Divided = Multiply(left, new Fraction((right as Fraction).Denominator, (right as Fraction).Numerator));
-            }
-            else if (right is int || right is long) {
-                Divided = Multiply(left, new Fraction(1, Convert.ToInt64(right)));
-            }
-            else {
-                throw new TypeAccessException("Cannot apply / operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
-            }
-
-            return Divided;
+        private static bool IsAvailableType(Object boxed) {
+            return (boxed is short || boxed is int || boxed is long);
         }
 
         #region Math
