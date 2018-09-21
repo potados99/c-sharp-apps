@@ -136,7 +136,7 @@ namespace Complex
                 leftImage = 0;
             }
             else {
-                throw new TypeAccessException("Cannot apply operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
+                throw new InvalidOperationException("Cannot apply operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
             }
 
             if (right is Complex) {
@@ -148,7 +148,7 @@ namespace Complex
                 rightImage = 0;
             }
             else {
-                throw new TypeAccessException("Cannot apply operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
+                throw new InvalidOperationException("Cannot apply operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
             }
         }
 
