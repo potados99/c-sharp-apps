@@ -144,7 +144,7 @@ namespace Fraction {
                 leftDenominator = 1;
             }
             else {
-                throw new TypeAccessException("Cannot apply operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
+                throw new InvalidOperationException("Cannot apply operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
             }
 
             if (right is Fraction) {
@@ -156,7 +156,7 @@ namespace Fraction {
                 rightDenominator = 1;
             }
             else {
-                throw new TypeAccessException("Cannot apply operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
+                throw new InvalidOperationException("Cannot apply operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
             }
         }
 
