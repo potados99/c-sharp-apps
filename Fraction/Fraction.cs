@@ -18,7 +18,7 @@ namespace Fraction {
             }
 
             var gcd = GetGCD(Numerator, Denominator);
-            this.Numerator = Numerator / gcd;
+            this.Numerator = Numerator / gcd; /* 통분 */
             this.Denominator = Denominator / gcd;
         }
 
@@ -83,6 +83,44 @@ namespace Fraction {
 
         #region Private Methods
 
+        private static void Extract(Object left, Object right, out long leftNumerator, out long leftDenominator, out long rightNumerator, out long rightDenominator)
+        {
+            if (left is Fraction)
+            {
+                leftNumerator = (left as Fraction).Numerator;
+                leftDenominator = (left as Fraction).Denominator;
+            }
+            else if (IsAvailableType(left))
+            {
+                leftNumerator = Convert.ToInt64(left);
+                leftDenominator = 1;
+            }
+            else
+            {
+                throw new InvalidOperationException("Cannot apply operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
+            }
+
+            if (right is Fraction)
+            {
+                rightNumerator = (right as Fraction).Numerator;
+                rightDenominator = (right as Fraction).Denominator;
+            }
+            else if (IsAvailableType(right))
+            {
+                rightNumerator = Convert.ToInt64(right);
+                rightDenominator = 1;
+            }
+            else
+            {
+                throw new InvalidOperationException("Cannot apply operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
+            }
+        }
+
+        private static bool IsAvailableType(Object boxed)
+        {
+            return (boxed is short || boxed is int || boxed is long);
+        }
+
         #region Operations
 
         private static Fraction Add(Object left, Object right) {
@@ -133,36 +171,6 @@ namespace Fraction {
 
         #endregion
 
-        private static void Extract(Object left, Object right, out long leftNumerator, out long leftDenominator, out long rightNumerator, out long rightDenominator) {
-            if (left is Fraction) {
-                leftNumerator = (left as Fraction).Numerator;
-                leftDenominator = (left as Fraction).Denominator;
-            }
-            else if (IsAvailableType(left)) {
-                leftNumerator = Convert.ToInt64(left);
-                leftDenominator = 1;
-            }
-            else {
-                throw new InvalidOperationException("Cannot apply operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
-            }
-
-            if (right is Fraction) {
-                rightNumerator = (right as Fraction).Numerator;
-                rightDenominator = (right as Fraction).Denominator;
-            }
-            else if (IsAvailableType(right)) {
-                rightNumerator = Convert.ToInt64(right);
-                rightDenominator = 1;
-            }
-            else {
-                throw new InvalidOperationException("Cannot apply operation between " + left.GetType().ToString() + " and " + right.GetType().ToString());
-            }
-        }
-
-        private static bool IsAvailableType(Object boxed) {
-            return (boxed is short || boxed is int || boxed is long);
-        }
-
         #region Math
 
         private static long GetGCD(long a, long b) {
@@ -179,6 +187,27 @@ namespace Fraction {
         }
 
         #endregion
+
+        #endregion
+
+
+        #region Requirements
+
+        Fraction AddFraction(Fraction left, Fraction right) {
+            return Add(left, right);
+        }
+
+        Fraction SubFraction(Fraction left, Fraction right) {
+            return Subtract(left, right);
+        }
+
+        Fraction MulFraction(Fraction left, Fraction right) {
+            return Multiply(left, right);
+        }
+
+        Fraction DivFraction(Fraction left, Fraction right) {
+            return Divide(left, right);
+        }
 
         #endregion
     }
