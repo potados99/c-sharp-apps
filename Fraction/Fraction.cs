@@ -28,10 +28,18 @@ namespace Fraction {
         #region Public Methods
 
         public override string ToString() {
-            var underZero = this.Numerator * this.Denominator < 0;
-            return underZero
+            return ToString(true);
+        }
+
+        public string ToString(bool showSign) {
+            var negative = IsNegative();
+            return negative && showSign
                 ? String.Format("-({0}/{1})", Math.Abs(this.Numerator), Math.Abs(this.Denominator))
                 : String.Format("{0}/{1}", Math.Abs(this.Numerator), Math.Abs(this.Denominator));
+        }
+
+        public bool IsNegative() {
+          return (this.Numerator * this.Denominator < 0);
         }
 
         #region Operator
@@ -193,20 +201,20 @@ namespace Fraction {
 
         #region Requirements
 
-        Fraction AddFraction(Fraction left, Fraction right) {
-            return Add(left, right);
+        Fraction AddFraction(Fraction target) {
+            return Add(this, target);
         }
 
-        Fraction SubFraction(Fraction left, Fraction right) {
-            return Subtract(left, right);
+        Fraction SubFraction(Fraction target) {
+            return Subtract(this, target);
         }
 
-        Fraction MulFraction(Fraction left, Fraction right) {
-            return Multiply(left, right);
+        Fraction MulFraction(Fraction target) {
+            return Multiply(this, target);
         }
 
-        Fraction DivFraction(Fraction left, Fraction right) {
-            return Divide(left, right);
+        Fraction DivFraction(Fraction target) {
+            return Divide(this, target);
         }
 
         #endregion
