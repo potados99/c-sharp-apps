@@ -170,7 +170,7 @@
             this.Controls.Add(this.InputGroupBox);
             this.Controls.Add(this.CalcButton);
             this.Name = "Form1";
-            this.Text = "z";
+            this.Text = "Calculator";
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
