@@ -78,7 +78,7 @@ namespace Menu
             OpenFileDialog fileDialog = new OpenFileDialog()
             {
                 Filter = "텍스트 파일 (*.txt)|*.txt",
-                InitialDirectory = "C:\\",
+                InitialDirectory = "C:\\menu",
                 RestoreDirectory = true,
                 Multiselect = true
             };
