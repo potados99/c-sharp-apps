@@ -50,26 +50,26 @@ namespace Menu
 
         private void MBButtonTypeTest_Click(object sender, EventArgs e)
         {
-            var type = (MessageBoxButtons)MBButtonType;
-
-            ShowMessageBox("Button Type Test: \n" + type.ToString(), "Test1");
             MBButtonType = (int)((MBButtonType + 1) % System.Enum.GetValues(typeof(MessageBoxButtons)).Length);
+
+            var type = (MessageBoxButtons)MBButtonType;
+            ShowMessageBox("Button Type Test: \n" + type.ToString(), "Test1");
         }
 
         private void MBImageTestButton_Click(object sender, EventArgs e)
         {
-            var type = (MessageBoxIcon)(MBImageType << 4);
-
-            ShowMessageBox("Icon Test: \n" + type.ToString(), "Test2");
             MBImageType = (int)((MBImageType + 1) % 4);
+
+            var type = (MessageBoxIcon)(MBImageType << 4);
+            ShowMessageBox("Icon Test: \n" + type.ToString(), "Test2");
         }
  
         private void MBFocusTestButton_Click(object sender, EventArgs e)
         {
-            var type = (MessageBoxDefaultButton)(MBDefaultbutton << 8);
-
-            ShowMessageBox("Default Button Test: \n" + type.ToString(), "Test3");
             MBDefaultbutton = (int)((MBDefaultbutton + 1) % System.Enum.GetValues(typeof(MessageBoxDefaultButton)).Length);
+
+            var type = (MessageBoxDefaultButton)(MBDefaultbutton << 8);
+            ShowMessageBox("Default Button Test: \n" + type.ToString(), "Test3");
         }
 
         #region Context menu
