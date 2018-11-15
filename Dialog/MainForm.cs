@@ -55,6 +55,7 @@ namespace Dialog
         {
             FDialog.ShowApply = ShowApplyCheckBox.Checked;
             FDialog.ShowColor = ShowColorCheckBox.Checked;
+            FDialog.Apply += FDialog_Apply;
 
             var result = FDialog.ShowDialog();
             switch (result)
@@ -63,9 +64,17 @@ namespace Dialog
                     return true;
                 case DialogResult.Yes:
                     return true;
+                case DialogResult.Retry:
+                    return true;
                 default:
                     return false;
             }
+        }
+
+        private void FDialog_Apply(object sender, EventArgs e)
+        {
+            PreviewTextBox.Font = FDialog.Font;
+            PreviewTextBox.ForeColor = FDialog.Color;
         }
 
         #endregion
