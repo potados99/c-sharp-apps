@@ -15,7 +15,18 @@ namespace Dialog
         public MainForm()
         {
             InitializeComponent();
+
+            FDialog.Apply += FDialog_Apply;
         }
+
+        #region Event handler
+
+        private void FDialog_Apply(object sender, EventArgs e)
+        {
+            ApplyFontChanges();
+        }
+
+        #endregion
 
         #region Button click listener
 
@@ -40,8 +51,7 @@ namespace Dialog
         {
             if (OpenFontDialog())
             {
-                PreviewTextBox.Font = FDialog.Font;
-                PreviewTextBox.ForeColor = FDialog.Color;
+                ApplyFontChanges();
             }
 
         }
@@ -55,7 +65,6 @@ namespace Dialog
         {
             FDialog.ShowApply = ShowApplyCheckBox.Checked;
             FDialog.ShowColor = ShowColorCheckBox.Checked;
-            FDialog.Apply += FDialog_Apply;
 
             var result = FDialog.ShowDialog();
             switch (result)
@@ -71,7 +80,7 @@ namespace Dialog
             }
         }
 
-        private void FDialog_Apply(object sender, EventArgs e)
+        private void ApplyFontChanges()
         {
             PreviewTextBox.Font = FDialog.Font;
             PreviewTextBox.ForeColor = FDialog.Color;
