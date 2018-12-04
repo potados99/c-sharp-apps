@@ -8,13 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace VisualCalculator
+namespace VisualCalculator.Forms
 {
-    public partial class Form1 : Form
+    public partial class CalcForm : Form
     {
-        public Form1()
+        public CalcForm()
         {
             InitializeComponent();
+        }
+
+        private void Num9Button_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ButtonsTableLayout_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
