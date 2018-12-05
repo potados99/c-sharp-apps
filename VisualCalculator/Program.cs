@@ -16,7 +16,24 @@ namespace VisualCalculator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.CalcForm());
+
+            var a = new Models.CalculatorModel();
+
+            a.AddCalcObject(new Models.CalcObject(Models.CalcObject.Type.NUM, 2));
+            a.AddCalcObject(new Models.CalcObject(Models.CalcObject.Type.OP_PLUS, 0));
+            a.AddCalcObject(new Models.CalcObject(Models.CalcObject.Type.NUM, 3));
+            a.AddCalcObject(new Models.CalcObject(Models.CalcObject.Type.OP_MULTIPLY, 0));
+            a.AddCalcObject(new Models.CalcObject(Models.CalcObject.Type.NUM, 6));
+            a.AddCalcObject(new Models.CalcObject(Models.CalcObject.Type.OP_MINUS, 6));
+            a.AddCalcObject(new Models.CalcObject(Models.CalcObject.Type.NUM, 20));
+
+            var b = a.Calculate();
+
+            Console.WriteLine(b.ToString());
+
+            Console.WriteLine("test done");
+
+            // Application.Run(new Forms.CalcForm());
         }
     }
 }
