@@ -26,23 +26,49 @@ namespace VisualCalculator.Models
             this.UserInputQueue.Clear();
          }
 
-        private Queue<CalcObject> ToPostFix()
+        public Queue<CalcObject> ToPostFix()
         {
-            Queue<CalcObject> PostFix = new Queue<CalcObject>();
+            Queue<CalcObject> PostFixQueue = new Queue<CalcObject>();
             Stack<CalcObject> OperatorStack = new Stack<CalcObject>();
  
+            // iterate user input queue and iterate
             while (this.UserInputQueue.Count > 0)
             {
-                CalcObject ob = this.UserInputQueue.Dequeue();
+                CalcObject userCalcObject = this.UserInputQueue.Dequeue();
 
-                if (ob.Obje)
+                if (userCalcObject.ObjectType == CalcObject.Type.NUM)
+                {
+                    // if the object is a number
+                    PostFixQueue.Enqueue(userCalcObject);
+                }
+                else
+                {
+                    // if the object is an operator
+                    int existingOperatorWeight = OperatorStack.Count != 0 ? (int)OperatorStack.Peek().ObjectType : 0;
+                    if (existingOperatorWeight >= (int)userCalcObject.ObjectType)
+                    {
+                        // if bigger or same weighted operator is in operator stack, pop it and enqueue in PostFix
+                        PostFixQueue.Enqueue(OperatorStack.Pop());
+                    }
+
+                    // add operator to operator stack
+                    OperatorStack.Push(userCalcObject);
+                }
+
 
 
 
 
             }
 
-            return PostFix;
+            // now move from operator stack to postfix queue
+            int operatorStackCount = OperatorStack.Count; // temp
+            for (int i = 0; i < operatorStackCount; i ++)
+            {
+                UserInputQueue.Enqueue(OperatorStack.Pop());
+            }
+
+            return PostFixQueue;
 
             /*
              * 1 + 2 * 3
@@ -74,26 +100,21 @@ namespace VisualCalculator.Models
 
     public class CalcObject
     {
-        public enum Kind {
-            NUM = 0,
-            OPERATION = 1
+        public enum Type {
+            NUM = 0x00,
+            OP_PLUS = 0x01,
+            OP_MINUS = 0x02,
+            OP_MULTIPLY = 0x01 << 0x04 | 0x01,
+            OP_DIVIDE = 0x01 << 0x04 | 0x01
         }
 
-        public enum Operator
+        public CalcObject (Type type, double number)
         {
-            PLUS = 1,
-            MINUS = 2,
-            MULTIPLY = 1 << 4 | 1,
-            DIVIDE = 1 << 4 | 2
+            this.ObjectType = type;
+            this.Number = number;
         }
 
-        public CalcObject (Kind kind, double content)
-        {
-            this.ObjectKind = kind;
-            this.Number = content;
-        }
-
-        public Kind ObjectKind;
+        public Type ObjectType;
         public Double Number;
     }
 
