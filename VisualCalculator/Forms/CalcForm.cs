@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VisualCalculator.ViewModel;
 
 namespace VisualCalculator.Forms
 {
@@ -17,6 +18,9 @@ namespace VisualCalculator.Forms
             InitializeComponent();
         }
 
+
+        #region Button Click Listeners
+
         /// <summary>
         /// 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, .
         /// </summary>
@@ -24,7 +28,7 @@ namespace VisualCalculator.Forms
         /// <param name="e"></param>
         private void NumButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show((sender as Button).Name);
+            NumberButtonPressed(Convert.ToInt32((sender as Button).Tag));
         }
 
         /// <summary>
@@ -34,7 +38,7 @@ namespace VisualCalculator.Forms
         /// <param name="e"></param>
         private void OpButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show((sender as Button).Name);
+            OperationButtonPressed((ViewModel.CalcFormViewModel.OperationButtons)Convert.ToInt32((sender as Button).Tag));
         }
 
         /// <summary>
@@ -44,7 +48,57 @@ namespace VisualCalculator.Forms
         /// <param name="e"></param>
         private void AcButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show((sender as Button).Name);
+            ActionButtonPressed((ViewModel.CalcFormViewModel.ActionButtons)Convert.ToInt32((sender as Button).Tag));
         }
+
+        #endregion
+
+        #region Private
+
+        private void NumberButtonPressed(int number)
+        {
+
+        }
+
+        private void OperationButtonPressed(ViewModel.CalcFormViewModel.OperationButtons operation)
+        {
+            switch (operation)
+            {
+                case CalcFormViewModel.OperationButtons.Divide:
+                    break;
+                case CalcFormViewModel.OperationButtons.Minus:
+                    break;
+                case CalcFormViewModel.OperationButtons.Multiply:
+                    break;
+                case CalcFormViewModel.OperationButtons.Plus:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void ActionButtonPressed(ViewModel.CalcFormViewModel.ActionButtons action)
+        {
+            switch (action)
+            {
+                case CalcFormViewModel.ActionButtons.Remove:
+                    MessageBox.Show("eee");
+                    break;
+                case CalcFormViewModel.ActionButtons.ClearError:
+                    break;
+                case CalcFormViewModel.ActionButtons.Clear:
+                    break;
+                case CalcFormViewModel.ActionButtons.Equel:
+                    break;
+                case CalcFormViewModel.ActionButtons.Root:
+                    break;
+                case CalcFormViewModel.ActionButtons.Percent:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        #endregion
     }
 }

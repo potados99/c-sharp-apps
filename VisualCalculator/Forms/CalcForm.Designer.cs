@@ -46,9 +46,9 @@
             this.OpMinusButton = new System.Windows.Forms.Button();
             this.OpMulButton = new System.Windows.Forms.Button();
             this.OpDivButton = new System.Windows.Forms.Button();
-            this.OpRootButton = new System.Windows.Forms.Button();
-            this.OpModButton = new System.Windows.Forms.Button();
-            this.EqualButton = new System.Windows.Forms.Button();
+            this.AcRootButton = new System.Windows.Forms.Button();
+            this.AcPercentButton = new System.Windows.Forms.Button();
+            this.AcEqualButton = new System.Windows.Forms.Button();
             this.Num8Button = new System.Windows.Forms.Button();
             this.AcRmButton = new System.Windows.Forms.Button();
             this.ResultTextBox = new System.Windows.Forms.TextBox();
@@ -79,9 +79,9 @@
             this.ButtonsTableLayout.Controls.Add(this.OpMinusButton, 3, 3);
             this.ButtonsTableLayout.Controls.Add(this.OpMulButton, 3, 2);
             this.ButtonsTableLayout.Controls.Add(this.OpDivButton, 3, 1);
-            this.ButtonsTableLayout.Controls.Add(this.OpRootButton, 4, 1);
-            this.ButtonsTableLayout.Controls.Add(this.OpModButton, 4, 2);
-            this.ButtonsTableLayout.Controls.Add(this.EqualButton, 4, 3);
+            this.ButtonsTableLayout.Controls.Add(this.AcRootButton, 4, 1);
+            this.ButtonsTableLayout.Controls.Add(this.AcPercentButton, 4, 2);
+            this.ButtonsTableLayout.Controls.Add(this.AcEqualButton, 4, 3);
             this.ButtonsTableLayout.Controls.Add(this.Num8Button, 1, 1);
             this.ButtonsTableLayout.Controls.Add(this.AcRmButton, 0, 0);
             this.ButtonsTableLayout.Location = new System.Drawing.Point(15, 82);
@@ -109,6 +109,7 @@
             this.AcCButton.Text = "C";
             this.AcCButton.UseVisualStyleBackColor = false;
             this.AcCButton.Click += new System.EventHandler(this.AcButton_Click);
+            this.AcCButton.Tag = ViewModel.CalcFormViewModel.ActionButtons.Clear;
             // 
             // AcCEButton
             // 
@@ -121,6 +122,8 @@
             this.AcCEButton.Text = "CE";
             this.AcCEButton.UseVisualStyleBackColor = false;
             this.AcCEButton.Click += new System.EventHandler(this.AcButton_Click);
+            this.AcCEButton.Tag = ViewModel.CalcFormViewModel.ActionButtons.ClearError;
+
             // 
             // Num0Button
             // 
@@ -240,10 +243,10 @@
             this.OpPlusButton.Name = "OpPlusButton";
             this.OpPlusButton.Size = new System.Drawing.Size(54, 54);
             this.OpPlusButton.TabIndex = 12;
+            this.OpPlusButton.Tag = VisualCalculator.ViewModel.CalcFormViewModel.OperationButtons.Plus;
             this.OpPlusButton.Text = "+";
             this.OpPlusButton.UseVisualStyleBackColor = false;
             this.OpPlusButton.Click += new System.EventHandler(this.OpButton_Click);
-            this.OpPlusButton.Tag = ViewModel.CalcFormViewModel.OperationButtons.Plus;
             // 
             // OpMinusButton
             // 
@@ -252,10 +255,10 @@
             this.OpMinusButton.Name = "OpMinusButton";
             this.OpMinusButton.Size = new System.Drawing.Size(54, 54);
             this.OpMinusButton.TabIndex = 13;
+            this.OpMinusButton.Tag = VisualCalculator.ViewModel.CalcFormViewModel.OperationButtons.Minus;
             this.OpMinusButton.Text = "-";
             this.OpMinusButton.UseVisualStyleBackColor = false;
             this.OpMinusButton.Click += new System.EventHandler(this.OpButton_Click);
-            this.OpMinusButton.Tag = ViewModel.CalcFormViewModel.OperationButtons.Minus;
             // 
             // OpMulButton
             // 
@@ -264,10 +267,10 @@
             this.OpMulButton.Name = "OpMulButton";
             this.OpMulButton.Size = new System.Drawing.Size(54, 54);
             this.OpMulButton.TabIndex = 14;
+            this.OpMulButton.Tag = VisualCalculator.ViewModel.CalcFormViewModel.OperationButtons.Multiply;
             this.OpMulButton.Text = "*";
             this.OpMulButton.UseVisualStyleBackColor = false;
             this.OpMulButton.Click += new System.EventHandler(this.OpButton_Click);
-            this.OpMulButton.Tag = ViewModel.CalcFormViewModel.OperationButtons.Multiply;
             // 
             // OpDivButton
             // 
@@ -276,44 +279,50 @@
             this.OpDivButton.Name = "OpDivButton";
             this.OpDivButton.Size = new System.Drawing.Size(54, 54);
             this.OpDivButton.TabIndex = 15;
+            this.OpDivButton.Tag = VisualCalculator.ViewModel.CalcFormViewModel.OperationButtons.Divide;
             this.OpDivButton.Text = "/";
             this.OpDivButton.UseVisualStyleBackColor = false;
             this.OpDivButton.Click += new System.EventHandler(this.OpButton_Click);
-            this.OpDivButton.Tag = ViewModel.CalcFormViewModel.OperationButtons.Divide;
             // 
-            // OpRootButton
+            // AcRootButton
             // 
-            this.OpRootButton.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.OpRootButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.OpRootButton.Location = new System.Drawing.Point(243, 63);
-            this.OpRootButton.Name = "OpRootButton";
-            this.OpRootButton.Size = new System.Drawing.Size(54, 54);
-            this.OpRootButton.TabIndex = 16;
-            this.OpRootButton.Text = "√";
-            this.OpRootButton.UseVisualStyleBackColor = false;
+            this.AcRootButton.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.AcRootButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.AcRootButton.Location = new System.Drawing.Point(243, 63);
+            this.AcRootButton.Name = "AcRootButton";
+            this.AcRootButton.Size = new System.Drawing.Size(54, 54);
+            this.AcRootButton.TabIndex = 16;
+            this.AcRootButton.Tag = VisualCalculator.ViewModel.CalcFormViewModel.ActionButtons.Root;
+            this.AcRootButton.Text = "√";
+            this.AcRootButton.UseVisualStyleBackColor = false;
+            this.AcRootButton.Click += new System.EventHandler(this.AcButton_Click);
             // 
-            // OpModButton
+            // AcPercentButton
             // 
-            this.OpModButton.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.OpModButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.OpModButton.Location = new System.Drawing.Point(243, 123);
-            this.OpModButton.Name = "OpModButton";
-            this.OpModButton.Size = new System.Drawing.Size(54, 54);
-            this.OpModButton.TabIndex = 17;
-            this.OpModButton.Text = "%";
-            this.OpModButton.UseVisualStyleBackColor = false;
+            this.AcPercentButton.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.AcPercentButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.AcPercentButton.Location = new System.Drawing.Point(243, 123);
+            this.AcPercentButton.Name = "AcPercentButton";
+            this.AcPercentButton.Size = new System.Drawing.Size(54, 54);
+            this.AcPercentButton.TabIndex = 17;
+            this.AcPercentButton.Tag = VisualCalculator.ViewModel.CalcFormViewModel.ActionButtons.Percent;
+            this.AcPercentButton.Text = "%";
+            this.AcPercentButton.UseVisualStyleBackColor = false;
+            this.AcPercentButton.Click += new System.EventHandler(this.AcButton_Click);
             // 
-            // EqualButton
+            // AcEqualButton
             // 
-            this.EqualButton.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.EqualButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.EqualButton.Location = new System.Drawing.Point(243, 183);
-            this.EqualButton.Name = "EqualButton";
-            this.ButtonsTableLayout.SetRowSpan(this.EqualButton, 2);
-            this.EqualButton.Size = new System.Drawing.Size(54, 114);
-            this.EqualButton.TabIndex = 18;
-            this.EqualButton.Text = "=";
-            this.EqualButton.UseVisualStyleBackColor = false;
+            this.AcEqualButton.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.AcEqualButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.AcEqualButton.Location = new System.Drawing.Point(243, 183);
+            this.AcEqualButton.Name = "AcEqualButton";
+            this.ButtonsTableLayout.SetRowSpan(this.AcEqualButton, 2);
+            this.AcEqualButton.Size = new System.Drawing.Size(54, 114);
+            this.AcEqualButton.TabIndex = 18;
+            this.AcEqualButton.Tag = VisualCalculator.ViewModel.CalcFormViewModel.ActionButtons.Equel;
+            this.AcEqualButton.Text = "=";
+            this.AcEqualButton.UseVisualStyleBackColor = false;
+            this.AcEqualButton.Click += new System.EventHandler(this.AcButton_Click);
             // 
             // Num8Button
             // 
@@ -333,8 +342,10 @@
             this.AcRmButton.Name = "AcRmButton";
             this.AcRmButton.Size = new System.Drawing.Size(54, 54);
             this.AcRmButton.TabIndex = 19;
+            this.AcRmButton.Tag = VisualCalculator.ViewModel.CalcFormViewModel.ActionButtons.Remove;
             this.AcRmButton.Text = "<-";
             this.AcRmButton.UseVisualStyleBackColor = false;
+            this.AcRmButton.Click += new System.EventHandler(this.AcButton_Click);
             // 
             // ResultTextBox
             // 
@@ -382,9 +393,9 @@
         private System.Windows.Forms.Button OpMinusButton;
         private System.Windows.Forms.Button OpMulButton;
         private System.Windows.Forms.Button OpDivButton;
-        private System.Windows.Forms.Button OpRootButton;
-        private System.Windows.Forms.Button OpModButton;
-        private System.Windows.Forms.Button EqualButton;
+        private System.Windows.Forms.Button AcRootButton;
+        private System.Windows.Forms.Button AcPercentButton;
+        private System.Windows.Forms.Button AcEqualButton;
         private System.Windows.Forms.Button AcCButton;
         private System.Windows.Forms.Button AcCEButton;
         private System.Windows.Forms.Button AcRmButton;
