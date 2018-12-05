@@ -16,6 +16,7 @@ namespace VisualCalculator.Model
                 return q.Count();
             }
         }
+
         public int Ops
         {
             get
@@ -24,6 +25,16 @@ namespace VisualCalculator.Model
                 return q.Count();
             }
         }
+
+        public double LastNumber
+        {
+            get
+            {
+                var q = from ob in UserInputQueue where ob.ObjectType == CalcObject.Type.NUM select ob.Number;
+                return q.ElementAt(q.Count() - 1);
+            }
+        }
+
         public CalculatorModel()
         {
             this.UserInputQueue = new Queue<CalcObject>();
@@ -75,6 +86,17 @@ namespace VisualCalculator.Model
             {
                 throw new Exception("Calculating: Calculating is done but UserInputQueue is not empty");
             }
+
+            return result;
+        }
+
+        public double PreviewCalculate()
+        {
+            var copied = new Queue<CalcObject>(this.UserInputQueue);
+
+            double result = Calculate();
+
+            this.UserInputQueue = copied;
 
             return result;
         }
