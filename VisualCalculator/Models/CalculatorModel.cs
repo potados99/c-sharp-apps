@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VisualCalculator.Models
 {
@@ -37,8 +34,17 @@ namespace VisualCalculator.Models
 
         public double Calculate()
         {
+            // determined by this.UserInputQueue.
+
             Queue<CalcObject> postFixQueue = ToPostFix(this.UserInputQueue);
-            return CalculatePostfixQueue(postFixQueue);
+            double result = CalculatePostfixQueue(postFixQueue);
+
+            if (this.UserInputQueue.Count != 0)
+            {
+                throw new Exception("Calculating: Calculating is done but UserInputQueue is not empty");
+            }
+
+            return result;
         }
 
         private Queue<CalcObject> ToPostFix(Queue<CalcObject> userInputQueue)
@@ -65,7 +71,7 @@ namespace VisualCalculator.Models
 
                     // if the object is an operator
                     int existingOperatorWeight = operatorStack.Count != 0 ? (int)operatorStack.Peek().ObjectType : 0;
-                    if (existingOperatorWeight >= (int)userCalcObject.ObjectType)
+                    if (existingOperatorWeight > 0 && (existingOperatorWeight >> 4) >= ((int)userCalcObject.ObjectType >> 4))
                     {
                         // if bigger or same weighted operator is in operator stack, pop it and enqueue in PostFix
                         postFixQueue.Enqueue(operatorStack.Pop());
@@ -74,11 +80,6 @@ namespace VisualCalculator.Models
                     // add operator to operator stack
                     operatorStack.Push(userCalcObject);
                 }
-
-
-
-
-
             }
 
             // now move from operator stack to postfix queue
@@ -146,8 +147,6 @@ namespace VisualCalculator.Models
 
             return resultStack.Pop();
         }
-
-
     }
 
     public class CalcObject
@@ -196,5 +195,4 @@ namespace VisualCalculator.Models
         }
 
     }
-
 }

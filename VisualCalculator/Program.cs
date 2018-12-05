@@ -24,16 +24,20 @@ namespace VisualCalculator
             a.AddCalcObject(new Models.CalcObject(Models.CalcObject.Type.NUM, 3));
             a.AddCalcObject(new Models.CalcObject(Models.CalcObject.Type.OP_MULTIPLY, 0));
             a.AddCalcObject(new Models.CalcObject(Models.CalcObject.Type.NUM, 6));
-            a.AddCalcObject(new Models.CalcObject(Models.CalcObject.Type.OP_MINUS, 6));
+            a.AddCalcObject(new Models.CalcObject(Models.CalcObject.Type.OP_MINUS, 0));
             a.AddCalcObject(new Models.CalcObject(Models.CalcObject.Type.NUM, 20));
+            a.AddCalcObject(new Models.CalcObject(Models.CalcObject.Type.OP_DIVIDE, 0));
+            a.AddCalcObject(new Models.CalcObject(Models.CalcObject.Type.NUM, 10));
 
-            var b = a.Calculate();
 
-            Console.WriteLine(b.ToString());
+            var obs = a.GetCalcObjects();
+            var rst = a.Calculate().ToString();
+
+            Console.WriteLine(obs + "=" + rst);
 
             Console.WriteLine("test done");
 
-            // Application.Run(new Forms.CalcForm());
+            Application.Run(new Forms.CalcForm());
         }
     }
 }
