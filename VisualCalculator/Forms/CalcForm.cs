@@ -24,12 +24,6 @@ namespace VisualCalculator.Forms
             InitializeComponent();
 
             VM = new CalcFormViewModel();
-
-            VM.UserPressedThisNumber(2);
-            VM.UserPressedThisNumber(3);
-            VM.UserPressedThisNumber(10);
-            VM.UserPressedThisNumber(4);
-            Console.WriteLine(VM.GetDisplayString());
         }
 
 
@@ -71,46 +65,26 @@ namespace VisualCalculator.Forms
 
         private void NumberButtonPressed(int number)
         {
-
+            VM.UserPressedThisNumber(number);
+            Refresh();
         }
 
         private void OperationButtonPressed(ViewModel.CalcFormViewModel.OperationButtons operation)
         {
-            switch (operation)
-            {
-                case CalcFormViewModel.OperationButtons.Divide:
-                    break;
-                case CalcFormViewModel.OperationButtons.Minus:
-                    break;
-                case CalcFormViewModel.OperationButtons.Multiply:
-                    break;
-                case CalcFormViewModel.OperationButtons.Plus:
-                    break;
-                default:
-                    break;
-            }
+            VM.UserPressedThisOperation(operation);
+            Refresh();
         }
 
         private void ActionButtonPressed(ViewModel.CalcFormViewModel.ActionButtons action)
         {
-            switch (action)
-            {
-                case CalcFormViewModel.ActionButtons.Remove:
-                    MessageBox.Show("eee");
-                    break;
-                case CalcFormViewModel.ActionButtons.ClearError:
-                    break;
-                case CalcFormViewModel.ActionButtons.Clear:
-                    break;
-                case CalcFormViewModel.ActionButtons.Equel:
-                    break;
-                case CalcFormViewModel.ActionButtons.Root:
-                    break;
-                case CalcFormViewModel.ActionButtons.Percent:
-                    break;
-                default:
-                    break;
-            }
+            VM.UserPressedThisAction(action);
+            Refresh();
+        }
+
+
+        private void Refresh()
+        {
+            this.ResultTextBox.Text = VM.GetDisplayString();
         }
 
         #endregion

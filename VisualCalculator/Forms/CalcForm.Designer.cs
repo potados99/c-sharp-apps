@@ -331,6 +331,7 @@
             this.Num8Button.Size = new System.Drawing.Size(54, 54);
             this.Num8Button.TabIndex = 9;
             this.Num8Button.Text = "8";
+            this.Num8Button.Tag = 8;
             this.Num8Button.UseVisualStyleBackColor = true;
             this.Num8Button.Click += new System.EventHandler(this.NumButton_Click);
             // 
