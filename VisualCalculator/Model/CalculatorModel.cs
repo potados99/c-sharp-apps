@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace VisualCalculator.Models
+namespace VisualCalculator.Model
 {
     class CalculatorModel
     {
@@ -148,4 +148,5 @@ namespace VisualCalculator.Models
             return resultStack.Pop();
         }
     }
+
 }

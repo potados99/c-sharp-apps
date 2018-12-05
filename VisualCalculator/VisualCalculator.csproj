@@ -45,18 +45,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\Form1.cs">
+    <Compile Include="Forms\CalcForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\CalcForm.Designer.cs">
+      <DependentUpon>CalcForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\CalcObject.cs" />
-    <Compile Include="Models\CalculatorModel.cs" />
+    <Compile Include="Model\CalcObject.cs" />
+    <Compile Include="Model\CalculatorModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ViewModel\CalcFormViewModel.cs" />
+    <EmbeddedResource Include="Forms\CalcForm.resx">
+      <DependentUpon>CalcForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
