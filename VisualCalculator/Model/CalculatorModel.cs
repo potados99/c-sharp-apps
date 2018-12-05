@@ -1,20 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace VisualCalculator.Model
 {
     class CalculatorModel
     {
-        public Queue<CalcObject> UserInputQueue { get; private set;}
- 
+        public Queue<CalcObject> UserInputQueue { get; private set; }
+
+        public int Nums
+        {
+            get
+            {
+                var q = from ob in UserInputQueue where ob.ObjectType == CalcObject.Type.NUM select ob;
+                return q.Count();
+            }
+        }
+        public int Ops
+        {
+            get
+            {
+                var q = from ob in UserInputQueue where ob.ObjectType != CalcObject.Type.NUM select ob;
+                return q.Count();
+            }
+        }
         public CalculatorModel()
         {
             this.UserInputQueue = new Queue<CalcObject>();
-         }
+        }
 
         public void AddCalcObject(CalcObject ob)
         {
             this.UserInputQueue.Enqueue(ob);
+        }
+
+        public CalcObject PopCalcObject()
+        {
+            int count = this.UserInputQueue.Count;
+
+            var backupQueue = new Queue<CalcObject>(this.UserInputQueue);
+            this.UserInputQueue.Clear();
+
+            for (int i = 0; i < count - 1; ++ i)
+            {
+                UserInputQueue.Enqueue(backupQueue.Dequeue());
+            }
+
+            return backupQueue.Dequeue();
         }
 
         public void ClearCalcObejcts()
@@ -51,7 +83,7 @@ namespace VisualCalculator.Model
         {
             Queue<CalcObject> postFixQueue = new Queue<CalcObject>();
             Stack<CalcObject> operatorStack = new Stack<CalcObject>();
- 
+
             // iterate user input queue and iterate
             while (userInputQueue.Count > 0)
             {
@@ -84,7 +116,7 @@ namespace VisualCalculator.Model
 
             // now move from operator stack to postfix queue
             int operatorStackCount = operatorStack.Count; // temp
-            for (int i = 0; i < operatorStackCount; i ++)
+            for (int i = 0; i < operatorStackCount; i++)
             {
                 postFixQueue.Enqueue(operatorStack.Pop());
             }
@@ -97,10 +129,10 @@ namespace VisualCalculator.Model
             Stack<double> resultStack = new Stack<double>();
 
             int queueCount = postfixQueue.Count;
-            for (int i = 0; i < queueCount; ++ i)
+            for (int i = 0; i < queueCount; ++i)
             {
                 CalcObject currentObject = postfixQueue.Dequeue();
-                
+
                 if (currentObject.ObjectType == CalcObject.Type.NUM)
                 {
                     resultStack.Push(currentObject.Number);

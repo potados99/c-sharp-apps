@@ -20,6 +20,7 @@ namespace VisualCalculator.Model
         public Type ObjectType;
         public Double Number;
 
+
         public CalcObject(Type type, double number)
         {
             this.ObjectType = type;
