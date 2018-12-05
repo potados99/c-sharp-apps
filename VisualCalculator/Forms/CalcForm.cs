@@ -13,9 +13,23 @@ namespace VisualCalculator.Forms
 {
     public partial class CalcForm : Form
     {
+        #region Variables
+
+        private CalcFormViewModel VM { get; set; }
+
+        #endregion
+
         public CalcForm()
         {
             InitializeComponent();
+
+            VM = new CalcFormViewModel();
+
+            VM.UserPressedThisNumber(2);
+            VM.UserPressedThisNumber(3);
+            VM.UserPressedThisNumber(10);
+            VM.UserPressedThisNumber(4);
+            Console.WriteLine(VM.GetDisplayString());
         }
 
 

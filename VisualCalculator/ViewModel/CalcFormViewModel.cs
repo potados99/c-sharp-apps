@@ -25,5 +25,71 @@ namespace VisualCalculator.ViewModel
             Root = 5,
             Percent = 6
         }
+
+        private Model.CalculatorModel M {get; set;}
+
+
+        private bool HandlingOperator = false;
+        private OperationButtons CurrentOperator;
+        private OperationButtons LastOperator;
+
+        private double CurrentNumber = 0.0;
+        private bool CurrentNumberHasDot = false;
+        private int CurrentDecimalPlaces = 0;
+
+
+        public void UserPressedThisNumber(int num)
+        {
+            UpdateCurrentNumber(num);
+            if (HandlingOperator)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
+        public void UserPressedThisOperation(OperationButtons operation)
+        {
+
+        }
+
+        public void UserPressedThisAction(ActionButtons action)
+        {
+
+        }
+
+        public string GetDisplayString()
+        {
+            return CurrentNumber.ToString();
+        }
+
+        #region Private
+
+        void UpdateCurrentNumber(int num)
+        {
+            if (num == 10)
+            {
+                // if it is dot
+                if (CurrentNumberHasDot) return;
+                CurrentNumber = 
+            }
+            else
+            {
+                // number
+                if (CurrentNumberHasDot)
+                {
+                    CurrentNumber = (double)num / (double)Math.Pow(10, ++CurrentDecimalPlaces);
+                }
+                else
+                {
+                    CurrentNumber = CurrentNumber * 10 + num;
+                }
+            }
+        }
+
+        #endregion
     }
 }
