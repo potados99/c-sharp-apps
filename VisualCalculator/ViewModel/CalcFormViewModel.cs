@@ -64,6 +64,8 @@ namespace VisualCalculator.ViewModel
             {
                 CurrentOperator = operation;
 
+                if (M.Ops == 0) return;
+
                 if (M.PopCalcObject().ObjectType == Model.CalcObject.Type.NUM)
                 {
                     throw new Exception("Expecting operator.");
